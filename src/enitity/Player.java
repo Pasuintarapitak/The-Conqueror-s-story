@@ -36,7 +36,7 @@
         public void setDefaultValues(){
             worldX = gp.tileSize * 1;
             worldY = gp.tileSize * 1;
-            speed = 5;
+            speed = 4;
             direction = "down";
 
             //Player status
@@ -155,7 +155,6 @@
             g2.drawImage(image, screenX, screenY, gp.tileSize ,gp.tileSize ,null); 
         }
         public void checkEnd() {
-            // ตรวจสอบว่าตำแหน่งของผู้เล่นตรงกับตำแหน่งของอ็อบเจ็กต์ end[0]
             if (gp.end[0] != null) {
               
                 if (this.worldX < gp.end[0].worldX + gp.end[0].solidArea.width &&
@@ -163,11 +162,24 @@
                     this.worldY < gp.end[0].worldY + gp.end[0].solidArea.height &&
                     this.worldY + this.solidArea.height > gp.end[0].worldY) {
                     
-                    // จัดการกับเหตุการณ์เมื่อผู้เล่นชนกับ end[0]
                     gp.gameState = gp.endState;
                     System.out.println("Reached the end!");
-                    // คุณสามารถเพิ่มโค้ดที่ต้องการที่นี่ เช่น เปลี่ยนสถานะเกมหรือรีเซ็ตผู้เล่น
                 }
+
+            //     if (this.worldX < gp.end[1].worldX + gp.end[1].solidArea.width &&
+            //     this.worldX + this.solidArea.width > gp.end[1].worldX &&
+            //     this.worldY < gp.end[1].worldY + gp.end[1].solidArea.height &&
+            //     this.worldY + this.solidArea.height > gp.end[1].worldY) {
+                
+            //     gp.gameState = gp.endState;
+            //     System.out.println("Reached the end!");
+            // }
+            }
+        }
+        public void checkHP(){
+            if(this.life < 1){
+                gp.gameState = gp.overState;
+                System.out.println("Game Over");
             }
         }
         
@@ -184,11 +196,26 @@
                         System.out.println("decrease HP");
                         // คุณสามารถจัดการกับการชนกันที่นี่ เช่น การรีเซ็ตตำแหน่งของมอนสเตอร์
                     }
-                }
+
+                    if (gp.slimeKing[0] != null) {
+                        // ตรวจสอบว่าตำแหน่งของผู้เล่นตรงกับตำแหน่งของมอนสเตอร์
+                        if (this.worldX < gp.slimeKing[0].worldX + gp.slimeKing[0].solidArea.width &&
+                            this.worldX + this.solidArea.width > gp.slimeKing[0].worldX &&
+                            this.worldY < gp.slimeKing[0].worldY + gp.slimeKing[0].solidArea.height &&
+                            this.worldY + this.solidArea.height > gp.slimeKing[0].worldY) {
+                            life-=4; // ลดชีวิตของผู้เล่น
+                            gp.slimeKing[0] = null;
+                            System.out.println("decrease HP");
+                            // คุณสามารถจัดการกับการชนกันที่นี่ เช่น การรีเซ็ตตำแหน่งของมอนสเตอร์
+                        }
+                    }
             }
+           
+     
         }
+    }
         public void checkHealth(){
-            for (int i = 0; i < gp.monster.length; i++) {
+            for (int i = 0; i < gp.health.length; i++) {
                 if (gp.health[i] != null) {
                     
                     if (this.worldX < gp.health[i].worldX + gp.health[i].solidArea.width &&

@@ -3,23 +3,28 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 import object.OBJ_Heart;
 import object.SuperObject;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font arial_40, arial_80B;   
+    Font arial_40, arial_80B , mono , mono_time;   
     BufferedImage heart_full,heart_half,heart_blank;
     public boolean messageOn = false;
     public String message ="";
     int messageCounter = 0;
     public boolean gameFinished = false;
+    double playTime;
+    DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     public UI(GamePanel gp){
         this.gp = gp;
-        arial_40 = new Font("Arial",Font.PLAIN,40);
-        arial_80B = new Font("Arial",Font.BOLD,80);
+        arial_40 = new Font("Arial",Font.BOLD,40);
+        mono = new Font("Monospaced",Font.BOLD,60);
+        mono_time = new Font("Monospaced",Font.PLAIN,40);
+        arial_80B = new Font("Arial",Font.BOLD,60);
     
         //Create HUD Object
         SuperObject heart = new OBJ_Heart(gp);
@@ -36,18 +41,32 @@ public class UI {
     public void draw(Graphics2D g2){
         this.g2 = g2;
         
-        g2.setFont(arial_40);
-        g2.setColor(Color.white);
+        // g2.setFont(arial_40);
+        // g2.setColor(Color.white);
 
         //Play State
         if(gp.gameState == gp.playState){
             drawPlayerLife();
+            drawTime();
         }
 
         if(gp.gameState == gp.endState){
             // drawPlayerLife();
             drawEndScreen();
+
         }
+
+        if(gp.gameState == gp.overState){
+            // drawPlayerLife();
+            drawOverScreen();
+
+        }
+    }
+    public void drawTime(){
+        playTime += (double)1/60;
+        g2.setFont(mono_time);
+        g2.setColor(Color.white);
+        g2.drawString("Time:"+dFormat.format(playTime),gp.tileSize*11,65);
     }
     public void drawPlayerLife(){                                                                                   
         int x = gp.tileSize/2;
@@ -78,26 +97,24 @@ public class UI {
         }
 
     }
-    public void drawPauseScreen(){
-        String text = "PAUSED";
-        int x = getXforCenteredText(text);
-        int y = gp.screenHeight/2;
-
-        g2.drawString(text, x, y);;
-    }
+ 
     public void drawOverScreen(){
         String text = "Game Over";
         int x = getXforCenteredText(text);
         int y = gp.screenHeight/2;
-
-        g2.drawString(text, x, y);;
+        g2.setFont(mono);
+        g2.setColor(Color.red);
+        g2.drawString(text, x-(gp.tileSize*3), y);
     }
     public void drawEndScreen(){
         String text = "FINISHED";
         int x = getXforCenteredText(text);
         int y = gp.screenHeight/2;
 
-        g2.drawString(text, x, y);;
+        g2.setFont(mono);
+        g2.setColor(Color.YELLOW);
+        g2.drawString(text, x-(gp.tileSize*2), y);
+        g2.drawString("Time : "+dFormat.format(playTime)+"s",x-(gp.tileSize*3)-8, y+80);
     }
     public int getXforCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
