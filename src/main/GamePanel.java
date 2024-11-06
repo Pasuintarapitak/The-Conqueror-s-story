@@ -10,13 +10,13 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import enitity.Entity;
+import enitity.End;
+import enitity.Heal;
+import enitity.Slime;
+import enitity.slimeKing;
 // import enitity.Entity;
 import enitity.Player;
-import object.OBJ_end;
-import object.OBJ_health;
-import object.OBJ_slime;
-import object.OBJ_slimeKing;
-import object.SuperObject;
+// import object.SuperObject;
 import tile.TitleManager;
 
 // For set game resolution display
@@ -49,10 +49,10 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this,keyH);
     // public SuperObject obj[] = new SuperObject[10]; 
     // public SuperObject monster[] = new SuperObject[20];
-    public Entity health[] = new OBJ_health[20]; 
-    public Entity end[] = new OBJ_end[2];
-    public Entity monster[] = new OBJ_slime[30];
-    public Entity slimeKing[] = new OBJ_slimeKing[2];
+    public Entity health[] = new Heal[20]; 
+    public Entity end[] = new End[2];
+    public Entity monster[] = new Slime[30];
+    public Entity slimeKing[] = new slimeKing[2];
 
 
     public UI ui = new UI(this);
@@ -74,8 +74,6 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);  // GamePanel can be focused to receive key input
     }
 
-  
-
     public void setupGame(){
         aSetter.setMonsters();
         aSetter.setObject();
@@ -86,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread  = new Thread(this);
         gameThread.start();
     }
+    
     @Override
     public void run() {
         // long currentTime = System.nanoTime();

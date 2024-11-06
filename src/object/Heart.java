@@ -9,11 +9,11 @@ import main.GamePanel;
 
 // import main.GamePanel;
 
-public class OBJ_Heart extends SuperObject{
+public class Heart extends SuperObject{
     
 
     GamePanel gp;
-    public OBJ_Heart(GamePanel gp){
+    public Heart(GamePanel gp){
         this.gp = gp;
 
         name = "Heart";

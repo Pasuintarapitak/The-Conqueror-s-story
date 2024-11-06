@@ -1,13 +1,9 @@
 package main;
 
-// import enitity.Entity;
-import object.OBJ_end;
-import object.OBJ_health;
-// import monster.MON_slime;
-// import object.OBJ_Key;
-import object.OBJ_slime;
-// import object.SuperObject;
-import object.OBJ_slimeKing;
+import enitity.End;
+import enitity.Heal;
+import enitity.Slime;
+import enitity.slimeKing;
 
 public class AssetSetter {
     
@@ -24,14 +20,14 @@ public class AssetSetter {
         
             for (int i = 0; i < posX.length; i++) {
                 if (i < gp.health.length) { 
-                    gp.health[i] = new OBJ_health();
+                    gp.health[i] = new Heal();
                     gp.health[i].worldX = posX[i] * gp.tileSize;
                     gp.health[i].worldY = posY[i] * gp.tileSize;
                 }
             }
 
             //END
-            gp.end[0] = new OBJ_end(gp);
+            gp.end[0] = new End(gp);
             gp.end[0].worldX = 90 * gp.tileSize;
             gp.end[0].worldY = 96 * gp.tileSize;
 
@@ -49,14 +45,14 @@ public class AssetSetter {
             int[] posY = {18, 12, 12, 7, 20, 21, 25, 35, 53, 69, 69, 55, 82, 74, 91, };
         
             for (int i = 0; i < posX.length; i++) {
-                gp.monster[i] = new OBJ_slime();
+                gp.monster[i] = new Slime();
                 gp.monster[i].worldX = posX[i] * gp.tileSize;
                 gp.monster[i].worldY = posY[i] * gp.tileSize;
             }
             
             //slime king
 
-            gp.slimeKing[0] = new OBJ_slimeKing();
+            gp.slimeKing[0] = new slimeKing();
             gp.slimeKing[0].worldX = 68 * gp.tileSize;
             gp.slimeKing[0].worldY = 80 * gp.tileSize;
             // gp.slimeKing[0].worldX = 10 * gp.tileSize;

@@ -5,15 +5,15 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
-import object.OBJ_Heart;
+import object.Heart;
 import object.SuperObject;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font arial_40, arial_80B , mono , mono_time;   
+    Font mono , mono_time;   
     BufferedImage heart_full,heart_half,heart_blank;
-    public boolean messageOn = false;
-    public String message ="";
+    // public boolean messageOn = false;
+    // public String message ="";
     int messageCounter = 0;
     public boolean gameFinished = false;
     double playTime;
@@ -21,23 +21,21 @@ public class UI {
 
     public UI(GamePanel gp){
         this.gp = gp;
-        arial_40 = new Font("Arial",Font.BOLD,40);
         mono = new Font("Monospaced",Font.BOLD,60);
         mono_time = new Font("Monospaced",Font.PLAIN,40);
-        arial_80B = new Font("Arial",Font.BOLD,60);
     
         //Create HUD Object
-        SuperObject heart = new OBJ_Heart(gp);
+        SuperObject heart = new Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
     
     }
     
-    public void showMessage(String text){
-        message = text;
-        messageOn = true;
-    }
+        // public void showMessage(String text){
+        //     message = text;
+        //     messageOn = true;
+        // }
     public void draw(Graphics2D g2){
         this.g2 = g2;
         

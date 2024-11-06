@@ -15,7 +15,7 @@
         KeyHandler keyH;
         public final int screenX;
         public final int screenY;
-        public final int damage = 1;
+       
         
         public Player(GamePanel gp , KeyHandler keyH){
             this.gp = gp;
