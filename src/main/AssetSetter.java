@@ -37,7 +37,6 @@ public class AssetSetter {
         
       
     }
-    
     public void setMonsters(){
         
             //slime

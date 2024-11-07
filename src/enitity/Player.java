@@ -163,6 +163,7 @@
                     this.worldY + this.solidArea.height > gp.end[0].worldY) {
                     
                     gp.gameState = gp.endState;
+                    gp.playSE(2);
                     System.out.println("Reached the end!");
                 }
 
@@ -179,10 +180,11 @@
         public void checkHP(){
             if(this.life < 1){
                 gp.gameState = gp.overState;
+                gp.playSE(3);
+                
                 System.out.println("Game Over");
             }
-        }
-        
+        }   
         public void checkDamage() {
             for (int i = 0; i < gp.monster.length; i++) {
                 if (gp.monster[i] != null) {
@@ -192,8 +194,10 @@
                         this.worldY < gp.monster[i].worldY + gp.monster[i].solidArea.height &&
                         this.worldY + this.solidArea.height > gp.monster[i].worldY) {
                         life--; // ลดชีวิตของผู้เล่น
+                        gp.playSE(1);
                         gp.monster[i] = null;
                         System.out.println("decrease HP");
+                        
                         // คุณสามารถจัดการกับการชนกันที่นี่ เช่น การรีเซ็ตตำแหน่งของมอนสเตอร์
                     }
 
@@ -204,6 +208,7 @@
                             this.worldY < gp.slimeKing[0].worldY + gp.slimeKing[0].solidArea.height &&
                             this.worldY + this.solidArea.height > gp.slimeKing[0].worldY) {
                             life-=4; // ลดชีวิตของผู้เล่น
+                            gp.playSE(1);
                             gp.slimeKing[0] = null;
                             System.out.println("decrease HP");
                             // คุณสามารถจัดการกับการชนกันที่นี่ เช่น การรีเซ็ตตำแหน่งของมอนสเตอร์
@@ -223,6 +228,7 @@
                         this.worldY <  gp.health[i].worldY +  gp.health[i].solidArea.height &&
                         this.worldY + this.solidArea.height >  gp.health[i].worldY) {
                         life++; // ลดชีวิตของผู้เล่น
+                        gp.playSE(4);
                         gp.health[i] = null;
                         System.out.println("increase HP");
                         

@@ -14,7 +14,7 @@ public class UI {
     BufferedImage heart_full,heart_half,heart_blank;
     // public boolean messageOn = false;
     // public String message ="";
-    int messageCounter = 0;
+    // int messageCounter = 0;
     public boolean gameFinished = false;
     double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
